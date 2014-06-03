@@ -131,5 +131,5 @@ void loseRoutine(){
 }
 
 
-／／this code was uploaded to https://github.com/p99410/MemoryGameArduino/blob/master／
+//this code was uploaded to https://github.com/p99410/MemoryGameArduino/blob/master／
 
