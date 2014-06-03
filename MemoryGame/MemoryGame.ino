@@ -1,4 +1,4 @@
-/*Memory Game v1.02
+/*Memory Game v1.03
 by JX Pan June 2014
 email 736107120@qq.com
 contact me before spreading thecode for any purpose
@@ -25,7 +25,6 @@ int arrange [100];
 int i;
 
 void setup() {
-  Serial.begin(9600);
   pinMode(PinLED1,OUTPUT);
   pinMode(PinLED2,OUTPUT);
   pinMode(PinBUT1,INPUT);
@@ -34,7 +33,7 @@ void setup() {
 
 void loop() {
 
-  randomSeed(analogRead(0)*analogRead(1)/analogRead(2)*analogRead(3));
+  randomSeed(analogRead(3)*millis()/analogRead(5));
   arrange[i] = random(1,3);
 
 
@@ -50,7 +49,7 @@ void loop() {
 
     if(digitalRead(PinBUT1)==HIGH){
       if(arrange[answerN] ==1){
-        flash(PinLED1,PinLED2,buttonReactTime,0);
+        flash(PinLED1,PinLED2,buttonReactTime);
         answerN ++;
         n=0;
       }
@@ -61,7 +60,7 @@ void loop() {
     }
     if(digitalRead(PinBUT2)==HIGH){
       if(arrange[answerN] ==2){
-        flash(PinLED2,PinLED1,buttonReactTime,0);
+        flash(PinLED2,PinLED1,buttonReactTime);
         answerN ++;
         n=0;
       }
@@ -71,6 +70,7 @@ void loop() {
       }
     }
     if (arrange[answerN]==0){
+      delay(400);
       break;
     }
     if(n==inPutWaitTime-1){
@@ -107,12 +107,11 @@ void loop() {
 }
 
 
-void flash(int pin, int pinToClose, int time, int time2 ){
+void flash(int pin, int pinToClose, int time){
   digitalWrite(pinToClose,LOW);
   digitalWrite(pin,HIGH);
   delay(time);
   digitalWrite(pin,LOW);
-  delay(time2);
 }
 
 void loseRoutine(){
