@@ -1,4 +1,4 @@
-/*Memory Game v1
+/*Memory Game v1.02
 by JX Pan June 2014
 email 736107120@qq.com
 contact me before spreading thecode for any purpose
@@ -16,8 +16,8 @@ const int PinLED1=4; //led1 has to be lower than led2
 const int PinLED2=5;
 const int PinBUT1=12; //button 1 works for led1
 const int PinBUT2=13;
-const int difficulty= 600;
-const int buttonReactTime= 400
+const int difficulty= 600; //the smaller the harder, but not lower than 63, cuz your eyes could not recognize the blinks then
+const int buttonReactTime= 400; // the smaller, the faster you can input your answer. 
 
 //-----------------
 //CODE:
@@ -43,14 +43,14 @@ void loop() {
     digitalWrite(PinLED1+2-arrange[n],LOW);
     delay(difficulty);
     digitalWrite(3+arrange[n],LOW);
-    delay(difficulty*0.8);
+    delay(difficulty*0.75);
   }
   int answerN = 0;
   for (int n = 0; n<inPutWaitTime;n++){
 
     if(digitalRead(PinBUT1)==HIGH){
       if(arrange[answerN] ==1){
-        flash(PinLED1,PinLED2,400);
+        flash(PinLED1,PinLED2,buttonReactTime,0);
         answerN ++;
         n=0;
       }
@@ -61,7 +61,7 @@ void loop() {
     }
     if(digitalRead(PinBUT2)==HIGH){
       if(arrange[answerN] ==2){
-        flash(PinLED2,PinLED1,buttonReactTime);
+        flash(PinLED2,PinLED1,buttonReactTime,0);
         answerN ++;
         n=0;
       }
@@ -107,24 +107,24 @@ void loop() {
 }
 
 
-void flash(int pin, int pinToClose, int time ){
+void flash(int pin, int pinToClose, int time, int time2 ){
   digitalWrite(pinToClose,LOW);
   digitalWrite(pin,HIGH);
   delay(time);
   digitalWrite(pin,LOW);
-  delay(time/2);
+  delay(time2);
 }
 
 void loseRoutine(){
   digitalWrite(PinLED1,HIGH);
   digitalWrite(PinLED2,HIGH);
-  delay(2000);
+  delay(500);
   digitalWrite(PinLED1,LOW);
   digitalWrite(PinLED2,LOW);
-  delay(2000);
+  delay(500);
   digitalWrite(PinLED2,HIGH);
   digitalWrite(PinLED1,HIGH);
-  delay(2000);
+  delay(1000);
   digitalWrite(PinLED1,LOW);
   digitalWrite(PinLED2,LOW);
   delay(1500);
