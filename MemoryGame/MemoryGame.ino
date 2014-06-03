@@ -1,16 +1,20 @@
 /*Memory Game v1
-by JX Pan
+by JX Pan June 2014
 email 736107120@qq.com
 contact me before spreading thecode for any purpose
+see DEMO here: http://v.youku.com/v_show/id_XNzIwOTE4NzI4.html
+      or here: https://www.youtube.com/watch?v=dylmt4iHhME
+      
+havr fun
 */
 
 
 //-----------------
 //SETTINGS:
 const int inPutWaitTime= 10000; //in ms, how long to wait for your input until ruled losing
-const int PinLED1=4;
+const int PinLED1=4; //led1 has to be lower than led2
 const int PinLED2=5;
-const int PinBUT1=12;
+const int PinBUT1=12; //button 1 works for led1
 const int PinBUT2=13;
 const int difficulty= 600;
 const int buttonReactTime= 400
@@ -35,8 +39,8 @@ void loop() {
 
 
   for(int n=0;arrange[n]>0;n++){
-    digitalWrite(3+arrange[n],HIGH);
-    digitalWrite(6-arrange[n],LOW);
+    digitalWrite(PinLED1-1+arrange[n],HIGH);
+    digitalWrite(PinLED1+2-arrange[n],LOW);
     delay(difficulty);
     digitalWrite(3+arrange[n],LOW);
     delay(difficulty*0.8);
@@ -108,7 +112,7 @@ void flash(int pin, int pinToClose, int time ){
   digitalWrite(pin,HIGH);
   delay(time);
   digitalWrite(pin,LOW);
-  delay(time/10);
+  delay(time/2);
 }
 
 void loseRoutine(){
@@ -131,5 +135,5 @@ void loseRoutine(){
 }
 
 
-//this code was uploaded to https://github.com/p99410/MemoryGameArduino/blob/master／
+
 
