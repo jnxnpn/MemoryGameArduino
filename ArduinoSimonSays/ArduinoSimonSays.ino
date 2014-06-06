@@ -1,4 +1,4 @@
-/*Memory Game v1.03
+/*ArduinoSimonSays v1.03
 by JX Pan June 2014
 email 736107120@qq.com
 contact me before spreading thecode for any purpose
